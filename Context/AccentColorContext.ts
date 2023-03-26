@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
 export const accents = {
-  RED: "#e11d48",
-  GREEN: "#059669",
-  BLUE: "#4f46e5",
+  RED: "#E01A4F",
+  GREEN: "#5FB49C",
+  BLUE: "#4070F4",
 };
 interface AccentColorContextProps {
   accentColor: string;
