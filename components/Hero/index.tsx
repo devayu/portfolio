@@ -6,9 +6,19 @@ import Image from "next/image";
 import { log } from "console";
 import { SocialIcon } from "react-social-icons";
 import Skills from "../Skills";
-import { AboutInfo } from "@/typings";
+import { IAbout, ISkills, ISocials } from "@/typings";
 import { urlForSanity } from "@/sanity.helper";
-export default function ({ name, role, aboutSmall, profilePic }: AboutInfo) {
+import "./Hero.module.css";
+import Orbits from "../Orbits";
+import { hexToRgb } from "@/utils/themeUtil";
+import AnimatedCursor from "react-animated-cursor";
+export default function ({
+  aboutInfo,
+  skillInfo,
+}: {
+  aboutInfo: IAbout;
+  skillInfo: ISkills;
+}) {
   const { accentColor, updateAccentColor } = useContext(AccentColorContext);
   const renderBackgroundView = (): JSX.Element => {
     return (
@@ -56,7 +66,7 @@ export default function ({ name, role, aboutSmall, profilePic }: AboutInfo) {
       </motion.div>
     );
   };
-  const renderSocialIcons = (urls: string[]): JSX.Element => {
+  const renderSocialIcons = (socials: ISocials[]): JSX.Element => {
     return (
       <motion.div
         className="flex flex-row items-center mt-5"
@@ -74,13 +84,13 @@ export default function ({ name, role, aboutSmall, profilePic }: AboutInfo) {
           duration: 0.5,
         }}
       >
-        {urls.map((url) => {
+        {socials.map((social) => {
           return (
             <SocialIcon
-              url={url}
+              url={social.socialUrl}
               bgColor="transparent"
               fgColor={accentColor}
-              key={url}
+              key={social._id}
               className="rounded-full hover:bg-gray-900"
             ></SocialIcon>
           );
@@ -91,7 +101,7 @@ export default function ({ name, role, aboutSmall, profilePic }: AboutInfo) {
 
   const renderProfileSection = (): JSX.Element => {
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full h-5/6">
         <div className="flex flex-1 justify-between p-10">
           <div className="flex flex-col max-w-2xl justify-center">
             <div>
@@ -101,20 +111,20 @@ export default function ({ name, role, aboutSmall, profilePic }: AboutInfo) {
                   color: accentColor,
                 }}
               >
-                {role}
+                {aboutInfo.role}
               </h1>
               <h2 className="mt-2 text-lg text-left">
-                {`Hi, I am ${name}. ${aboutSmall}`}
+                {`Hi, I am ${aboutInfo.name}. ${aboutInfo.subtitle}`}
               </h2>
             </div>
             <div className="-ml-3.5">
-              {renderSocialIcons([
-                "https://www.linkedin.com/feed/",
-                "https://www.youtube.com/watch?v=urgi2iz9P6U&t=650s",
-              ])}
+              {renderSocialIcons(aboutInfo.socials)}
             </div>
           </div>
-          <div>
+          {/* <motion.div
+            animate={{ rotate: 360 }} // Target rotation angle (360 degrees)
+            transition={{ duration: 100, repeat: Infinity, ease: "linear" }} // Set loop to Infinity
+          >
             <div className="relative flex items-center border border-[#fffffa24] rounded-full h-[280px] w-[280px] animate-pulse">
               <div
                 className="absolute rounded-full h-[40px] w-[40px] -bottom-5 left-20"
@@ -148,9 +158,10 @@ export default function ({ name, role, aboutSmall, profilePic }: AboutInfo) {
                 alt="profile image"
               ></Image>
             </div>
-          </div>
+          </motion.div> */}
+          <Orbits profilePic={aboutInfo.profilePic}></Orbits>
         </div>
-        <Skills></Skills>
+        <Skills skillInfo={skillInfo}></Skills>
       </div>
     );
   };

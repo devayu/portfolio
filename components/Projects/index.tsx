@@ -6,32 +6,11 @@ import Image from "next/image";
 import { log } from "console";
 import { SocialIcon } from "react-social-icons";
 import Link from "next/link";
-export default function () {
+import { IProjects } from "@/typings";
+import { getHoverClassName } from "@/utils/themeUtil";
+import ProjectItem from "../ProjectItem";
+export default function ({ projects }: { projects: IProjects }) {
   const { accentColor, updateAccentColor } = useContext(AccentColorContext);
-  const projects = [
-    {
-      name: "Dummy project",
-      projectLink: "projectlink.com",
-      githubLink: "https://github.com/devayu/cryptogenie",
-      imgUrl: "imgUrl.com",
-      description:
-        "My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player.",
-      techStack: ["Next.js", "Node.js", "Next.js"],
-    },
-    {
-      name: "Dummy project",
-      projectLink: "projectlink.com",
-      githubLink: "https://github.com/devayu/cryptogenie",
-      imgUrl: "imgUrl.com",
-      description: "description",
-      techStack: ["Next.js", "Node.js"],
-    },
-  ];
-  const getHoverClassName = (): string => {
-    if (accentColor === accents.RED) return `hover:text-[#E01A4F]`;
-    if (accentColor === accents.BLUE) return `hover:text-[#4070F4]`;
-    return `hover:text-[#5FB49C]`;
-  };
   return (
     <div className="p-10 items-center justify-center max-w-7xl">
       <div className="flex flex-col">
@@ -45,8 +24,8 @@ export default function () {
         </h2>
         <p className="text-lg font-bold tracking-wide">subtitle text 🧩</p>
       </div>
-      <div className="flex flex-col gap-10 mt-5">
-        {projects.map((project, index) => {
+      <div>
+        {projects?.projectList.map((project, index) => {
           return (
             <div className="flex flex-1 bg-[#06121a] gap-10 p-3 rounded-lg">
               <Image
@@ -59,21 +38,25 @@ export default function () {
                 alt="dummy image"
               ></Image>
               <div className="flex flex-col justify-between">
-                <h2 className="uppercase font-semibold">{project.name}</h2>
-                <p className={`text-[#ebebeb]`}>{project.description}</p>
+                <h2 className="uppercase font-semibold">{project.title}</h2>
+                <p className={`text-[#ebebeb]`}>{project.desc}</p>
                 <div className="mt-2">
                   <p className="font-semibold text-sm">Tech Stack</p>
                   <div className="flex gap-2 mt-2 flex-wrap">
-                    {project.techStack.map((tech) => (
-                      <div className="rounded-lg bg-[#040B11] p-2">{tech}</div>
+                    {project?.techStack.map((tech) => (
+                      <div className="rounded-lg bg-[#040B11] p-2">
+                        {tech.skillTitle}
+                      </div>
                     ))}
                   </div>
                 </div>
                 <div className="flex gap-10 mt-2">
                   <Link
-                    href={project.githubLink}
+                    href={project?.codeLink}
                     target="_blank"
-                    className={`flex gap-2 justify-start ${getHoverClassName()}`}
+                    className={`flex gap-2 justify-start ${getHoverClassName(
+                      accentColor
+                    )}`}
                   >
                     Code
                     <svg
@@ -92,9 +75,11 @@ export default function () {
                     </svg>
                   </Link>
                   <Link
-                    href={project.projectLink}
+                    href={project?.demoLink}
                     target="_blank"
-                    className={`flex gap-2 justify-start ${getHoverClassName()}`}
+                    className={`flex gap-2 justify-start ${getHoverClassName(
+                      accentColor
+                    )}`}
                   >
                     Live Demo
                     <svg

@@ -1,18 +1,18 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'skillInfo',
-  title: 'SkillInfo',
+  name: 'skills',
+  title: 'Skills',
   type: 'document',
   fields: [
     defineField({
-      name: 'skillSubtitle',
-      title: 'SkillSubtitle',
+      name: 'subtitle',
+      title: 'Subtitle',
       type: 'string',
     }),
     defineField({
-      name: 'skills',
-      title: 'Skills',
+      name: 'skillsList',
+      title: 'SkillsList',
       type: 'array',
       of: [
         {

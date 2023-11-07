@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+}
+
+.static-div {
+  background-color: #3498db;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+
+.rotating-div {
+  background-color: #f39c12;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

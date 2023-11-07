@@ -7,6 +7,7 @@ import { log } from "console";
 import { SocialIcon } from "react-social-icons";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { getHoverClassName } from "@/utils/themeUtil";
 type Inputs = {
   name: string;
   email: string;
@@ -38,11 +39,6 @@ export default function () {
     },
   ];
   const email = "ayushmaurya.work@gmail.com";
-  const getHoverClassName = (): string => {
-    if (accentColor === accents.RED) return `hover:text-[#E01A4F]`;
-    if (accentColor === accents.BLUE) return `hover:text-[#4070F4]`;
-    return `hover:text-[#5FB49C]`;
-  };
   return (
     <div className="p-10 items-center justify-center max-w-7xl">
       <div className="flex flex-col">
@@ -75,7 +71,7 @@ export default function () {
             <p className="font-semibold">Mail</p>
             <a
               href={`mailto:${email}`}
-              className={`text-sm ${getHoverClassName()}`}
+              className={`text-sm ${getHoverClassName(accentColor)}`}
             >
               {email}
             </a>

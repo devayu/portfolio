@@ -10,8 +10,9 @@ export default function () {
   const dummytext =
     "As a Junior Front-End Developer, I possess an impressive arsenal of skills in HTML, CSS, JavaScript, React, Tailwind, and SCSS. I excel in designing and maintaining responsive websites that offer a smooth user experience. My expertise lies in crafting dynamic, engaging interfaces through writing clean and optimized code and utilizing cutting-edge development tools and techniques. I am also a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications.";
   return (
-    <div className="p-10 grid grid-cols-2 items-center justify-center max-w-7xl h-screen">
-      <div className="relative">
+    <div className="grid grid-cols-2 items-center max-w-7xl mx-auto py-10">
+      {/* <div className="flex items-center h-screen max-w-7xl mx-auto xl:items-center"> */}
+      <div className="">
         <Image
           src={
             "https://images.unsplash.com/photo-1485988412941-77a35537dae4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=896&q=80"

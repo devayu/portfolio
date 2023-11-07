@@ -2,6 +2,7 @@ import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import AccentColorContext, { accents } from "@/Context/AccentColorContext";
+import { getHoverClassName } from "@/utils/themeUtil";
 
 export default function () {
   const { accentColor } = useContext(AccentColorContext);
@@ -35,11 +36,6 @@ export default function () {
       </motion.div>
     );
   };
-  const getHoverClassName = (): string => {
-    if (accentColor === accents.RED) return `hover:text-[#E01A4F]`;
-    if (accentColor === accents.BLUE) return `hover:text-[#4070F4]`;
-    return `hover:text-[#5FB49C]`;
-  };
   const renderNavMenus = (): JSX.Element => {
     const navItems = ["Home", "About", "Project", "Contact"];
     return (
@@ -47,7 +43,7 @@ export default function () {
         {navItems.map((navItem) => {
           return (
             <nav>
-              <a href="" className={getHoverClassName()}>
+              <a href="" className={getHoverClassName(accentColor)}>
                 {navItem}
               </a>
             </nav>
@@ -58,7 +54,7 @@ export default function () {
   };
 
   return (
-    <header className="bg-[#06121a] sticky top-0 flex items-center justify-between max-w-7xl mx-auto z-20 p-5 px-10 xl:items-center shadow-lg">
+    <header className="bg-[#06121a] sticky top-0 flex items-center justify-between z-20 p-5 px-10 xl:items-center shadow-lg">
       <h1 className="font-bold tracking-wider text-xl">
         devayu<span style={{ color: accentColor }}>.</span>
       </h1>
